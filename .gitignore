@@ -1,0 +1,5 @@
+# Fotos originales bajadas de Google Maps: material de trabajo, no se publica.
+fotos/
+
+# Configuración local de Claude Code
+.claude/
