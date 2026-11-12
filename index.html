@@ -116,12 +116,12 @@ address{font-style:normal}
 .buscador .campo-huespedes,.buscador .boton,.buscador .consulta-error{grid-column:1 / -1}
 .buscador .boton{min-height:54px}
 @media (min-width:780px){.buscador{grid-template-columns:1fr 1fr .62fr auto;align-items:end}.buscador .campo-huespedes,.buscador .boton{grid-column:auto}}
-/* Celular: un campo por fila, con la etiqueta al costado para que la fecha se lea entera */
+/* Celular: un campo por fila, con la etiqueta al costado y un ancho justo para la fecha */
 @media (max-width:540px){
   .buscador{grid-template-columns:1fr;gap:10px;padding:16px}
-  .buscador .campo{grid-template-columns:6.2rem minmax(0,1fr);align-items:center;gap:.75rem;padding:0}
-  .buscador .campo label{font-size:1rem}
-  .consulta .campo:nth-child(-n+2){grid-column:1 / -1}
+  .tarjeta-form .consulta{grid-template-columns:1fr;gap:10px}
+  .buscador .campo,.consulta .campo{grid-template-columns:6.2rem minmax(0,10.5rem);align-items:center;gap:.75rem;padding:0}
+  .buscador .campo label,.consulta .campo label{font-size:1rem}
 }
 .puntaje{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .8rem;margin-top:1.7rem;font-size:1rem}
 .puntaje .estrellas{font-size:1.3rem}
