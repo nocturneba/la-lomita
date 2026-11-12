@@ -3,3 +3,8 @@ fotos/
 
 # Configuración local de Claude Code
 .claude/
+
+# Material de trabajo local: no se publica
+assets/
+preview/
+prompts/

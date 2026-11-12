@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La Lomita · Hostería en Villa Gesell con desayuno incluido</title>
-<meta name="description" content="Hostería familiar en Villa Gesell para descansar cerca de la playa y del centro. Desayuno incluido, jardín con parrilla y cochera. Reservá directo por WhatsApp, sin intermediarios.">
+<meta name="description" content="Hostería familiar en Villa Gesell para descansar cerca de la playa y del centro. Desayuno incluido, jardín con parrilla y cochera. Reservá directo por WhatsApp.">
 <meta name="theme-color" content="#0B1A2E">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_AR">
@@ -99,7 +99,9 @@ address{font-style:normal}
 
 /* Portada: foto a pantalla completa */
 .portada{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:max(640px,100svh);overflow:hidden;color:#fff;background:var(--noche)}
-.portada-foto{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+/* La foto va en una capa propia: la capa hace el paralaje y la foto el acercamiento lento */
+.portada-capa{position:absolute;inset:0;z-index:-2;overflow:hidden;will-change:transform}
+.portada-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform-origin:50% 62%}
 .portada::before{content:"";position:absolute;inset:0;z-index:-1;background:
   linear-gradient(180deg,rgba(8,18,34,.6) 0%,rgba(8,18,34,0) 22%),
   linear-gradient(0deg,rgba(8,18,34,.86) 0%,rgba(8,18,34,.35) 42%,rgba(8,18,34,0) 70%),
@@ -128,14 +130,22 @@ address{font-style:normal}
 .puntaje a{color:#fff}
 
 @media (prefers-reduced-motion:no-preference){
-  .portada-foto{animation:asentar 2.4s var(--facil) both}
+  .portada-foto{animation:entrar 1.6s var(--facil) both,respirar 24s ease-in-out 1.6s infinite alternate}
   .portada-contenido > *{animation:subir .9s var(--facil) both}
   .portada-contenido > :nth-child(2){animation-delay:.1s}
   .portada-contenido > :nth-child(3){animation-delay:.2s}
   .portada-contenido > :nth-child(4){animation-delay:.3s}
   .portada-contenido > :nth-child(5){animation-delay:.4s}
 }
-@keyframes asentar{from{transform:scale(1.1)}to{transform:scale(1)}}
+@keyframes entrar{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
+@keyframes respirar{from{transform:scale(1)}to{transform:scale(1.1)}}
+
+/* Historia */
+.nosotros{display:grid;gap:clamp(32px,5vw,72px);align-items:center}
+@media (min-width:900px){.nosotros{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}}
+.nosotros-foto{width:100%;max-width:440px;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radio)}
+.sobretitulo{display:inline-block;margin-bottom:.9rem;padding:.3em .9em;border-radius:999px;background:var(--terracota-suave);color:var(--terracota);font-weight:700;font-size:.92rem;letter-spacing:.02em}
+.nosotros .bajada{max-width:56ch;font-size:1.18rem;line-height:1.65}
 @keyframes subir{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 
 /* Zócalo: la franja azul de la casa, con lo más buscado */
@@ -294,6 +304,7 @@ address{font-style:normal}
     </a>
     <div class="navegacion">
       <nav class="menu" aria-label="Secciones">
+        <a href="#nosotros">Nosotros</a>
         <a href="#servicios">Servicios</a>
         <a href="#habitaciones">Habitaciones</a>
         <a href="#opiniones">Opiniones</a>
@@ -308,14 +319,16 @@ address{font-style:normal}
 <main id="contenido">
 
   <section class="portada sobre-oscuro" aria-labelledby="titular">
-    <picture>
-      <source media="(max-width: 700px)" srcset="img/portada-movil.jpg" width="1050" height="1400">
-      <img class="portada-foto" src="img/portada.jpg" width="2000" height="1125" fetchpriority="high" alt="La casa de La Lomita, blanca con zócalo azul, y su jardín con pinos.">
-    </picture>
+    <div class="portada-capa">
+      <picture>
+        <source media="(max-width: 700px)" srcset="img/portada-movil.jpg" width="1050" height="1400">
+        <img class="portada-foto" src="img/portada.jpg" width="2000" height="1125" fetchpriority="high" alt="La casa de La Lomita, blanca con zócalo azul, y su jardín con pinos.">
+      </picture>
+    </div>
     <div class="adentro portada-contenido">
       <p class="etiqueta">Temporada 2027 · Reservas abiertas</p>
       <h1 class="titular" id="titular">Desconectá y descansá <span>cerca de la playa y del centro.</span></h1>
-      <p class="entrada">Hostería familiar en una zona tranquila y arbolada de Villa Gesell. Desayuno incluido, jardín con parrilla y cochera. Reservá directo por WhatsApp, sin intermediarios.</p>
+      <p class="entrada">Hostería familiar en una zona tranquila y arbolada de Villa Gesell. Desayuno incluido, jardín con parrilla y cochera. Reservá directo por WhatsApp.</p>
       <p class="puntaje">
         <span class="estrellas" aria-hidden="true">★★★★★</span>
         <a href="https://www.google.com/maps/search/?api=1&query=La%20Lomita%2C%20Av.%206%20421%2C%20Villa%20Gesell" target="_blank" rel="noopener"><strong>4,5 de 5</strong> en Google · 183 opiniones</a>
@@ -341,6 +354,17 @@ address{font-style:normal}
       <li>Wifi</li>
     </ul>
   </div>
+
+  <section class="tramo tramo-arena" id="nosotros" aria-labelledby="t-nosotros">
+    <div class="adentro nosotros">
+      <img class="nosotros-foto revelar" src="img/nosotros.jpg" width="1000" height="1250" loading="lazy" alt="El jardín de La Lomita con mesas, pinos y cielo de verano, junto a la casa blanca.">
+      <div class="revelar">
+        <span class="sobretitulo">Desde 2004</span>
+        <h2 class="subtitulo" id="t-nosotros">Una hostería familiar en Villa Gesell</h2>
+        <p class="bajada">La Lomita es una casa de familia que recibe huéspedes desde 2004. Lo que más destacan quienes vienen es la atención: un trato cercano y buenas recomendaciones para recorrer la ciudad. Queremos que te sientas como en casa, con un desayuno completo, el jardín para descansar y la playa y el centro cerca.</p>
+      </div>
+    </div>
+  </section>
 
   <section class="tramo" id="servicios" aria-labelledby="t-servicios">
     <div class="adentro servicios">
@@ -485,10 +509,9 @@ address{font-style:normal}
     <img class="fondo" src="img/fondo-reservas.jpg" width="1800" height="1012" loading="lazy" alt="">
     <div class="adentro">
       <div class="revelar">
-        <h2 class="subtitulo" id="t-reservar">Reservá directo, sin intermediarios</h2>
+        <h2 class="subtitulo" id="t-reservar">Reservá directo con nosotros</h2>
         <p class="bajada">Elegí las fechas y la cantidad de huéspedes. Te respondemos por WhatsApp con disponibilidad y tarifa.</p>
         <ul class="garantias">
-          <li>Sin intermediarios ni comisiones</li>
           <li>Respuesta personal por WhatsApp</li>
           <li>Consultar no tiene costo</li>
         </ul>
@@ -559,6 +582,20 @@ address{font-style:normal}
 (() => {
   // Número de WhatsApp que recibe las consultas (formato internacional, sin + ni espacios).
   const WHATSAPP = "5491176001445";
+
+  // Paralaje suave de la portada: la foto baja más lento que la página.
+  const capa = document.querySelector(".portada-capa");
+  if (capa && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let pendiente = false;
+    const moverCapa = () => {
+      pendiente = false;
+      const y = Math.min(window.scrollY, window.innerHeight * 1.2);
+      capa.style.transform = `translate3d(0, ${(y * 0.22).toFixed(1)}px, 0)`;
+    };
+    window.addEventListener("scroll", () => {
+      if (!pendiente) { pendiente = true; requestAnimationFrame(moverCapa); }
+    }, { passive: true });
+  }
 
   // Encabezado: transparente sobre la portada, sólido al bajar.
   const cabecera = document.getElementById("cabecera");
